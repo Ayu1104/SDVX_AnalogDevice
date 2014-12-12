@@ -58,8 +58,9 @@ void loop()
 // 外部割り込みから呼び出される変数
 void rotRotEnc(void)
 {
-  if(!digitalRead(dRotAPin)){  // ロータリーエンコーダー回転開始
-    if(digitalRead(dRotBPin)){
+  int m_nNewRot = digitalRead(dRotAPin);
+  if(!m_nNewRot){  // ロータリーエンコーダー回転開始
+    if(m_nNewRot){
       //右回転
       m_nOldRot = 'R';
     } else {
@@ -67,7 +68,7 @@ void rotRotEnc(void)
       m_nOldRot = 'L';
     }
   } else {  // ロータリーエンコーダー回転停止
-    if(digitalRead(dRotBPin)){
+    if(m_nNewRot){
       if(m_nOldRot == 'L'){
         // 左回転の時の処理
         m_nValue--;
